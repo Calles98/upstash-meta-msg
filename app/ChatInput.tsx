@@ -2,22 +2,21 @@
 
 import fetcher from '@/lib/fetchMessages';
 import { Message } from '@/typings';
-import { getServerSession } from 'next-auth';
+import { log } from 'console';
+import { Session, getServerSession } from 'next-auth';
 import React, { FormEvent, useState } from 'react'
 import useSWR from 'swr';
 import { v4 as uuid } from 'uuid'
 
 type Props = {
 
-    session: Awaited<ReturnType<typeof getServerSession>>
+    session: Session | null;
 
 }
 
 function ChatInput({ session }: Props) {
     const [input, setInput] = useState(""); 
     const { data: messages, error, mutate } = useSWR("/api/getMessages", fetcher);  
-
-    console.log(messages);
     
 
     const addMessage = async (e: FormEvent<HTMLFormElement>) => {
@@ -30,6 +29,7 @@ function ChatInput({ session }: Props) {
         setInput(""); 
 
         const id = uuid(); 
+
 
         const message: Message = {
             id,
