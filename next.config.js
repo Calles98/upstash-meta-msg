@@ -3,7 +3,8 @@ const nextConfig = {
     images: {
         domains: [
             'links.papareact.com',
-            'media.licdn.com'
+            'media.licdn.com',
+            'scontent.fhmo2-1.fna.fbcdn.net'
     ],
     }
 }
